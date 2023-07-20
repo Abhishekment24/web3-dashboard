@@ -9,21 +9,45 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { API_CALL } from "src/services/APICalls";
-import { showDate } from "src/components/commonfunctions";
-function AllSubscriber() {
-  //   let ActionButton = <Button variant="contained">Add</Button>;
+import {
+  convertStringToFormat,
+  showDate
+} from "src/components/commonfunctions";
+import { Button } from "@mui/material";
+import AddUsers from "./AddUsers";
+function ManageUsers() {
+  // modal actions to add users
+  const [open, setOpen] = React.useState(false);
+  const [reloadPage, setReloadPage] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const reloadIt = () => setReloadPage(!reloadPage);
+
+  let ActionButton = (
+    <Button variant="contained" onClick={handleOpen} className="cus-btn">
+      Add
+    </Button>
+  );
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
     (async () => {
-      let { data } = await API_CALL.sunscription.get();
+      setOpen(false);
+      let { data } = await API_CALL.users.get({});
       console.log(data);
       setTableData(data.data);
     })();
-  }, []);
+  }, [reloadPage]);
 
   return (
-    <PageContainer title="Subscribers" description="">
-      <DashboardCard title="Subscribers">
+    <PageContainer title="Users" description="">
+      <DashboardCard title="Manage Users" action={ActionButton}>
+        <AddUsers
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          open={open}
+          reloadIt={reloadIt}
+        />
+
         <BasicTable rows={tableData} />
       </DashboardCard>
     </PageContainer>
@@ -40,8 +64,9 @@ const BasicTable = ({ rows }) => {
       <TableHead>
         <TableRow>
           <TableCell style={title}>Sr No</TableCell>
+          <TableCell style={title}>Role</TableCell>
           <TableCell style={title} align="center">
-            Email
+            Full Name
           </TableCell>
           <TableCell style={title} align="center">
             Wallet Address
@@ -64,8 +89,11 @@ const BasicTable = ({ rows }) => {
             <TableCell component="th" scope="row">
               {index + 1}
             </TableCell>
-            <TableCell align="center">{row.email}</TableCell>
-            <TableCell align="center">{row.walletAddress}</TableCell>
+            <TableCell align="center">{row.role}</TableCell>
+            <TableCell align="center">{row.fullName}</TableCell>
+            <TableCell align="center">
+              {convertStringToFormat(row.walletAddress)}
+            </TableCell>
             <TableCell align="center">{showDate(row.createdAt)}</TableCell>
           </TableRow>
         ))}
@@ -73,4 +101,4 @@ const BasicTable = ({ rows }) => {
     </Table>
   );
 };
-export default AllSubscriber;
+export default ManageUsers;

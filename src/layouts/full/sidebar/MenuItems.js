@@ -83,6 +83,12 @@ export const Menuitems2 = [
     title: "Subscribers",
     icon: IconLayoutDashboard,
     href: "/subscriber"
+  },
+  {
+    id: uniqueId(),
+    title: "Manage Users",
+    icon: IconLayoutDashboard,
+    href: "/manage-users"
   }
 ];
 

@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Loadable from "../layouts/full/shared/loadable/Loadable";
 import State from "src/Pages/States/State";
 import AllSubscriber from "src/views/subscriber/allsubscriber";
+import ManageUsers from "src/views/users/manageUsers";
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import("../layouts/full/FullLayout")));
@@ -34,6 +35,7 @@ const Router = [
       { path: "/", element: <Navigate to="/subscriber" /> },
       { path: "/dashboard", exact: true, element: <Dashboard /> },
       { path: "/subscriber", exact: true, element: <AllSubscriber /> },
+      { path: "/manage-users", exact: true, element: <ManageUsers /> },
       { path: "/state", exact: true, element: <State /> },
       { path: "/sample-page", exact: true, element: <SamplePage /> },
       { path: "/icons", exact: true, element: <Icons /> },

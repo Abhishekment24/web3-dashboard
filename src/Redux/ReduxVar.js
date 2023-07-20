@@ -1,4 +1,5 @@
-export const REDUX_VAR={
-    TEST:"TEST_ACTIONS",
-    SHOW_THEME:"SHOW_THEME"
-}
+export const REDUX_VAR = {
+  TEST: "TEST_ACTIONS",
+  SHOW_THEME: "SHOW_THEME",
+  METAMASK: "METAMASK_ADDRESS"
+};
