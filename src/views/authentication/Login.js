@@ -117,13 +117,15 @@ const Login2 = () => {
               if (data.data[0].role == "admin") {
                 ACTIONS.saveMetamaskDetails(dispatch, { address });
                 toast.success("Login successful!");
+                await sessionStorage.setItem("metamask", "true");
+
                 navigate("/subscriber");
               } else {
                 toast.error("You are not authorized to access it");
               }
             });
         } else {
-          navigate("/");
+          navigate("/subscriber");
         }
       } catch (error) {
         console.log(error);

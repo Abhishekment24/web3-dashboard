@@ -15,6 +15,7 @@ import {
 } from "src/components/commonfunctions";
 import { Button } from "@mui/material";
 import AddUsers from "./AddUsers";
+import SeoLib from "../../components/CommonComponents/Helmet";
 function ManageUsers() {
   // modal actions to add users
   const [open, setOpen] = React.useState(false);
@@ -39,8 +40,9 @@ function ManageUsers() {
   }, [reloadPage]);
 
   return (
-    <PageContainer title="Users" description="">
+    <PageContainer title="Manage Users" description="">
       <DashboardCard title="Manage Users" action={ActionButton}>
+        {/* <SeoLib title="User Management" /> */}
         <AddUsers
           handleOpen={handleOpen}
           handleClose={handleClose}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
@@ -30,17 +31,9 @@ const Profile = () => {
   const logoutHandle = async () => {
     if (window.ethereum) {
       const provider = window.ethereum;
-
+      await sessionStorage.setItem("metamask", "false");
+      navigate("/auth/login");
       // Request disconnection
-      window.ethereum
-        .disconnect()
-        .then(() => {
-          console.log("Disconnected from Metamask.");
-          // Perform any additional actions after disconnection, if needed
-        })
-        .catch((error) => {
-          console.error("Error while disconnecting from Metamask:", error);
-        });
     } else {
       console.log("Metamask is not installed or not accessible.");
     }
@@ -87,7 +80,7 @@ const Profile = () => {
           }
         }}
       >
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <IconUser width={20} />
           </ListItemIcon>
@@ -104,7 +97,7 @@ const Profile = () => {
             <IconListCheck width={20} />
           </ListItemIcon>
           <ListItemText>My Tasks</ListItemText>
-        </MenuItem>
+        </MenuItem> */}
         <Box mt={1} py={1} px={2}>
           <Button
             // to="/auth/login"

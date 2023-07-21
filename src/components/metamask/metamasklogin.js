@@ -17,10 +17,15 @@ function MetamaskLogin() {
     return () => {};
   }, [metamask.address]);
   const showPopup = async () => {
+    // return null;
     if (window.ethereum) {
+      let checkSession = await sessionStorage.getItem("metamask");
+      if (checkSession != "true") return navigate("/auth/login");
+
       try {
         if (!metamask.address) {
-          navigate("/auth/login");
+          // alert("hrere");
+          // navigate("/auth/login");
           await window.ethereum
             .request({ method: "eth_requestAccounts" })
             .then(async (res) => {
@@ -40,8 +45,8 @@ function MetamaskLogin() {
                 toast.error("You are not authorized to access it");
               }
             });
-        } else {
-          navigate("/");
+        } else {  
+          navigate("/subscriber");
         }
       } catch (error) {
         console.log(error);
