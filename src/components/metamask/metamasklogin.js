@@ -25,15 +25,17 @@ function MetamaskLogin() {
             .request({ method: "eth_requestAccounts" })
             .then(async (res) => {
               let address = res[0];
-              console.log("my address---->", address);
+
+              console.log("my address---->", res);
+
               const { data } = await API_CALL.users.getByWallet(address);
               console.log(data.data, "metamaskloginuserlogin");
-              if (!res.success)
+              if (!data.success)
                 return toast.error("You are not authorized to access it");
               if (data.data[0].role == "admin") {
                 ACTIONS.saveMetamaskDetails(dispatch, { address });
                 toast.success("Login successful!");
-                // navigate("/subscriber");
+                navigate("/subscriber");
               } else {
                 toast.error("You are not authorized to access it");
               }
