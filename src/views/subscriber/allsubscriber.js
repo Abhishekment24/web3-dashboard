@@ -44,6 +44,9 @@ const BasicTable = ({ rows }) => {
             Email
           </TableCell>
           <TableCell style={title} align="center">
+            Discord/Telegram
+          </TableCell>
+          <TableCell style={title} align="center">
             Wallet Address
           </TableCell>
           <TableCell style={title} align="center">
@@ -65,6 +68,7 @@ const BasicTable = ({ rows }) => {
               {index + 1}
             </TableCell>
             <TableCell align="center">{row.email}</TableCell>
+            <TableCell align="center">{row.discordOrTelegram}</TableCell>
             <TableCell align="center">{row.walletAddress}</TableCell>
             <TableCell align="center">{showDate(row.createdAt)}</TableCell>
           </TableRow>
