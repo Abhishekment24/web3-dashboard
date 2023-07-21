@@ -28,21 +28,22 @@ const Profile = () => {
   };
 
   const logoutHandle = async () => {
-    const accounts = await window.ethereum
-      .request({
-        method: "eth_requestAccounts",
-        params: [
-          {
-            eth_accounts: {}
-          }
-        ]
-      })
-      .then(async () => {
-        await window.ethereum.request({
-          method: "eth_requestAccounts"
+    if (window.ethereum) {
+      const provider = window.ethereum;
+
+      // Request disconnection
+      window.ethereum
+        .disconnect()
+        .then(() => {
+          console.log("Disconnected from Metamask.");
+          // Perform any additional actions after disconnection, if needed
+        })
+        .catch((error) => {
+          console.error("Error while disconnecting from Metamask:", error);
         });
-      });
-    console.log(accounts, "<<<thisisaccount");
+    } else {
+      console.log("Metamask is not installed or not accessible.");
+    }
   };
 
   return (
@@ -104,7 +105,7 @@ const Profile = () => {
           </ListItemIcon>
           <ListItemText>My Tasks</ListItemText>
         </MenuItem>
-        {/* <Box mt={1} py={1} px={2}>
+        <Box mt={1} py={1} px={2}>
           <Button
             // to="/auth/login"
             variant="outlined"
@@ -115,7 +116,7 @@ const Profile = () => {
           >
             Logout
           </Button>
-        </Box> */}
+        </Box>
       </Menu>
     </Box>
   );
