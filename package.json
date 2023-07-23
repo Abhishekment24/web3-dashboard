@@ -1,7 +1,6 @@
 {
   "name": "modernize",
   "version": "0.1.0",
-  "homepage": "https://AkshayMent.github.io/web3-dashboard",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -52,8 +51,6 @@
     "prettier": "^2.3.1"
   },
   "scripts": {
-    "predeploye":"npm run build",
-    "deploy":"gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
